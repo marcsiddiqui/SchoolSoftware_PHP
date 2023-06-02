@@ -12,6 +12,8 @@
 <div class="container mt-3">
   <h2>Employees List</h2>
   <p>Here we will show all employees from database:</p>
+  <a href="http://localhost:82/sms/hrm/CreateEmployee.php" type="button" class="btn btn-primary">Add New Employee</a>
+  <br /><br />
   <table class="table">
     <thead class="table-dark">
       <tr>
