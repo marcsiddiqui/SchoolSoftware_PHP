@@ -7,9 +7,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <style>
-    .errorMessage{
+    .errorMessage {
       color: red;
-      
     }
   </style>
 </head>
@@ -21,128 +20,78 @@
 
 <div class="container">
   <h2>Create New Employee</h2>
-  <form method="post">
+
+  <form method="POST">
 
     <?php
-    
-    $firstName = $lastName = $email = $password = $cnic = $address = $phoneNumber = "";
-    $firstNameError = $lastNameError = $emailError = $passwordError = $cnicError = $addressError = $phoneNumberError = "";
 
+      $firstName = $lastName = $email = $password = $cnic = $address = $phoneNumber = "";
+      $firstNameError = $lastNameError = $emailError = $passwordError = $cnicError = $addressError = $phoneNumberError = "";
 
+      if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        
+        $firstName = $_POST["FirstName"];
+        $lastName = $_POST["LastName"];
+        $phoneNumber = $_POST["PhoneNumber"];
+        $password = $_POST["Password"];
+        $cnic = $_POST["CNIC"];
+        $email = $_POST["Email"];
+        $address = $_POST["Address"];
 
+        $firstNameError = empty($firstName) ? "Please enter First Name!" : "";
+        $lastNameError = empty($lastName) ? "Please enter Last Name!" : "";
+        $emailError = empty($email) ? "Please enter Email!" : "";
+        $passwordError = empty($password) ? "Please enter Password!" : "";
+        $cnicError = empty($cnic) ? "Please enter CNIC!" : "";
+        $addressError = empty($address) ? "Please enter Address!" : "";
+        $phoneNumberError = empty($phoneNumber) ? "Please enter Phone Number!" : "";
 
-    
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      
-      $firstName = $_POST["FirstName"];
-      $lastName = $_POST["LastName"];
-      $email = $_POST["Email"];
-      $password = $_POST["Password"];
-      $cnic = $_POST["CNIC"];
-      $address = $_POST["Address"];
-      $phoneNumber = $_POST["PhoneNumber"];
-
-      if (empty($firstName)) {
-        $firstNameError = "Please enter First Name!";
       }
-      else {
-        $firstNameError = "";
-      }
-
-      if (empty($lastName)) {
-        $lastNameError = "Please enter Last Name!";
-      }
-      else {
-        $lastNameError = "";
-      }
-
-      if (empty($email)) {
-        $emailError = "Please enter Email!";
-      }
-      else {
-        $emailError = "";
-      }
-
-      if (empty($password)) {
-        $passwordError = "Please enter Password!";
-      }
-      else {
-        $passwordError = "";
-      }
-
-      if (empty($cnic)) {
-        $cnicError = "Please enter CNIC!";
-      }
-      else {
-        $cnicError = "";
-      }
-
-      if (empty($address)) {
-        $addressError = "Please enter Address!";
-      }
-      else {
-        $addressError = "";
-      }
-
-      if (empty($phoneNumber)) {
-        $phoneNumberError = "Please enter Phone Number!";
-      }
-      else {
-        $phoneNumberError = "";
-      }
-
-    }
 
     ?>
 
-
-<div class="form-group">
+    
+    <div class="form-group">
       <label>First Name:</label>
-      <input type="text" class="form-control" id="FirstName" name="FirstName" />
+      <input type="text" class="form-control" id="FirstName" name="FirstName" value="<?php echo $firstName; ?>">
       <p class="errorMessage"><?php echo $firstNameError; ?></p>
     </div>
-
     <div class="form-group">
       <label>Last Name:</label>
-      <input type="text" class="form-control" id="LastName" name="LastName" />
+      <input type="text" class="form-control" id="LastName" name="LastName" value="<?php echo $lastName; ?>">
       <p class="errorMessage"><?php echo $lastNameError; ?></p>
     </div>
-
-    <div class="form-group">
-      <label>Email:</label>
-      <input type="text" class="form-control" id="Email" name="Email" />
-      <p class="errorMessage"><?php echo $emailError; ?></p>
-    </div>
-
-    <div class="form-group">
-      <label>Password:</label>
-      <input type="password" class="form-control" id="Password" name="Password" />
-      <p class="errorMessage"><?php echo $passwordError; ?></p>
-    </div>
-
     <div class="form-group">
       <label>CNIC:</label>
-      <input type="text" class="form-control" id="CNIC" name="CNIC" />
+      <input type="text" class="form-control" id="CNIC" name="CNIC" value="<?php echo $cnic; ?>">
       <p class="errorMessage"><?php echo $cnicError; ?></p>
     </div>
-
     <div class="form-group">
-      <label>Address:</label>
-      <input type="text" class="form-control" id="Address" name="Address" />
-      <p class="errorMessage"><?php echo $addressError; ?></p>
+      <label>Email:</label>
+      <input type="email" class="form-control" id="Email" name="Email" value="<?php echo $email; ?>">
+      <p class="errorMessage"><?php echo $emailError; ?></p>
     </div>
-
+    <div class="form-group">
+      <label>Password:</label>
+      <input type="password" class="form-control" id="Password" name="Password" value="<?php echo $password; ?>">
+      <p class="errorMessage"><?php echo $passwordError; ?></p>
+    </div>
     <div class="form-group">
       <label>Phone Number:</label>
-      <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" />
+      <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" value="<?php echo $phoneNumber; ?>">
       <p class="errorMessage"><?php echo $phoneNumberError; ?></p>
+    </div>
+    <div class="form-group">
+      <label>Address:</label>
+      <input type="text" class="form-control" id="Address" name="Address" value="<?php echo $address; ?>">
+      <p class="errorMessage"><?php echo $addressError; ?></p>
     </div>
 
     <br /><br />
 
-    <button type="submit" class="btn btn-primary">Save</button>
-
+    <button type="submit" class="btn btn-primary">Save Employee</button>
   </form>
+
 </div>
 
 </body>
