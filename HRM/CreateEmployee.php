@@ -25,6 +25,8 @@
 
     <?php
 
+      include "../DatabaseConfigurations/DbFucntions.php";
+
       $firstName = $lastName = $email = $password = $cnic = $address = $phoneNumber = "";
       $firstNameError = $lastNameError = $emailError = $passwordError = $cnicError = $addressError = $phoneNumberError = "";
 
@@ -45,6 +47,24 @@
         $cnicError = empty($cnic) ? "Please enter CNIC!" : "";
         $addressError = empty($address) ? "Please enter Address!" : "";
         $phoneNumberError = empty($phoneNumber) ? "Please enter Phone Number!" : "";
+
+
+        if (!empty($firstName) && !empty($lastName) && !empty($email) && !empty($password) && !empty($cnic) && !empty($address) && !empty($phoneNumber)) {
+          
+          $columnsArray = array(
+            "FirstName" => $firstName,
+            "LastName" => $lastName,
+            "PhoneNumber" => $phoneNumber,
+            "Password" => $password,
+            "CNIC" => $cnic,
+            "Email" => $email,
+            "Address" => $address
+          );
+
+          Insert("Employee", $columnsArray);
+
+        }
+
 
       }
 
