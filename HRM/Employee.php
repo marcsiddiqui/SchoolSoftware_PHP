@@ -14,26 +14,39 @@
   <p>Here we will show all employees from database:</p>
   <a href="http://localhost:82/sms/hrm/CreateEmployee.php" class="btn btn-primary" type="button">Add New Employee</a>
   <br /><br />
-  <table class="table">
-    <thead class="table-dark">
-      <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
-        <th>CNIC</th>
-        <th>PhoneNumber</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php
-        
-        include "../DatabaseConfigurations/Employee.php";
+  <form method="POST">
+    <table class="table">
+      <thead class="table-dark">
+        <tr>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Email</th>
+          <th>CNIC</th>
+          <th>PhoneNumber</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+          
+          include "../DatabaseConfigurations/Employee.php";
 
-        PrepareEmployeeList();
-      
-      ?>
-    </tbody>
-  </table>
+          if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $employeeId = $_POST["deleteEmployee"];
+
+            if ($employeeId > 0) {
+              
+              DeleteEmployee($employeeId);
+
+            }
+          }
+
+          PrepareEmployeeList();
+        
+        ?>
+      </tbody>
+    </table>
+  </form>
 </div>
 
 </body>

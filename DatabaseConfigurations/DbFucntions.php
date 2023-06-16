@@ -49,41 +49,36 @@
         }
     }
 
+    function GetDataById($tableName, $id)
+    {
+        if (!empty($tableName) && $id > 0) {
+            $query = "SELECT * FROM ". $tableName . " WHERE Id = " . $id;
 
+            $result  = ExecutreMySqlQuery($query);
 
+            return $result;
+        }
+    }
 
-
-
-
-
-
-    // function Insert($tableName, $columnsArray)
-    // {
-    //     if (!empty($tableName) && count($columnsArray) > 0) {
-    //         $query = "INSERT INTO " . $tableName . "(";
-
-    //         foreach ($columnsArray as $key => $value) {
-    //             $query = $query . $key . ",";
-    //         }
+    function Update($tableName, $col_val, $id)
+    {
+        if (!empty($tableName) && count($col_val) > 0) {
             
-    //         $query = substr_replace($query, ")", -1);
+            $query = "UPDATE " . $tableName . " SET ";
+
+            foreach ($col_val as $key => $value) {
+
+                if (gettype($value) == "string") {
+                    $query = $query . " " . $key . " = '" . $value . "',";
+                }
+                else {
+                    $query = $query . " " . $key . " = " . $value . ",";
+                }
+            }
+
+            $query = substr_replace($query, " WHERE Id = " .  $id, -1);
             
-    //         $query = $query . " VALUES(";
-            
-    //         foreach ($columnsArray as $key => $value) {
-    //             if (gettype($value) == "string") {
-    //                 $query = $query . "'" . $value . "',";
-    //             }
-    //             else {
-    //                 $query = $query . $value . ",";
-    //             }
-    //         }
-
-    //         $query = substr_replace($query, ")", -1);
-
-    //         echo $query;
-    //     }
-    // }
-
-    
+            ExecutreMySqlQuery($query);
+        }
+    }
 ?>

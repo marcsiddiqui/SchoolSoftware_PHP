@@ -15,7 +15,10 @@
                                 <td>".$row["Email"]."</td>
                                 <td>".$row["CNIC"]."</td>
                                 <td>".$row["PhoneNumber"]."</td>
-                                <td><button type='button' class='btn btn-danger'>Delete</button></td>
+                                <td>
+                                    <a href='http://localhost:82/sms/hrm/EditEmployee.php?id=".$row["Id"]."' class='btn btn-warning' type='button'>Edit</a>
+                                    <button name='deleteEmployee' type='submit' value='".$row["Id"]."' class='btn btn-danger'>Delete</button>
+                                </td>
                             </tr>";
                     }
                 }
@@ -26,5 +29,12 @@
                 }
             }
         }
+    }
+
+    function DeleteEmployee($employeeId)
+    {
+        // $query = "DELETE FROM Employee WHERE Id = " . $employeeId;
+        $query = "UPDATE Employee SET Deleted = 1 WHERE Id = " . $employeeId;
+        $result = ExecutreMySqlQuery($query);
     }
 ?>
