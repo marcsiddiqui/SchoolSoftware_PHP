@@ -81,4 +81,13 @@
             ExecutreMySqlQuery($query);
         }
     }
+
+    function DeleteById($tableName, $id, $isSoftDelete)
+    {
+        $bit = $isSoftDelete ? '1' : 0;
+        $query = "CALL DeleteById(@tableName:='".$tableName."', @id:= ".$id.", @isSoftDelete:=".$bit.")";
+
+        ExecutreMySqlQuery($query);
+    }
+    
 ?>

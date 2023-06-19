@@ -58,11 +58,6 @@
 
       }
 
-
-      
-      
-
-
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         $firstName = $_POST["FirstName"];

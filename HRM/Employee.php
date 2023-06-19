@@ -36,7 +36,7 @@
 
             if ($employeeId > 0) {
               
-              DeleteEmployee($employeeId);
+              DeleteById('Employee', $employeeId, 1);
 
             }
           }

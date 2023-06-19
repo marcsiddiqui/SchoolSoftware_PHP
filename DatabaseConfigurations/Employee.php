@@ -30,11 +30,4 @@
             }
         }
     }
-
-    function DeleteEmployee($employeeId)
-    {
-        // $query = "DELETE FROM Employee WHERE Id = " . $employeeId;
-        $query = "UPDATE Employee SET Deleted = 1 WHERE Id = " . $employeeId;
-        $result = ExecutreMySqlQuery($query);
-    }
 ?>
