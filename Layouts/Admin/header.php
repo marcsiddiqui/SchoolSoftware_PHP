@@ -77,7 +77,8 @@
                            </li>
                         </ul>
                      </li>
-                     <li><a href="widgets.html"><i class="fa fa-clock-o orange_color"></i> <span>Widgets</span></a></li>
+                     <li><a href="http://localhost:82/sms/hrm/employee.php"><i class="fa fa-users blue2_color"></i> <span>Employees</span></a></li>
+                     <li><a href="http://localhost:82/sms/student/student.php"><i class="fa fa-graduation-cap orange_color"></i> <span>Students</span></a></li>
                      <li>
                         <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>Elements</span></a>
                         <ul class="collapse list-unstyled" id="element">

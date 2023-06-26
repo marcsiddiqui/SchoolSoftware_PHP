@@ -44,7 +44,7 @@
             }
 
             $query = substr_replace($query, ");", -1);
-
+            
             ExecutreMySqlQuery($query);
         }
     }
