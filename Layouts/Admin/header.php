@@ -1,3 +1,11 @@
+<?php 
+
+   if (!isset($_COOKIE["username"])) {
+      header("Location:http://localhost:82/sms/login.php");
+   }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -49,7 +57,7 @@
                      <div class="user_profle_side">
                         <div class="user_img"><img class="img-responsive" src="<?php echo "http://localhost:82/sms/Layouts/Admin/images/layout_img/user_img.jpg" ?>" alt="#" /></div>
                         <div class="user_info">
-                           <h6>John David</h6>
+                           <h6><?php echo $_COOKIE["fullname"]; ?></h6>
                            <p><span class="online_animation"></span> Online</p>
                         </div>
                      </div>
@@ -136,12 +144,12 @@
                               </ul>
                               <ul class="user_profile_dd">
                                  <li>
-                                    <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="<?php echo "http://localhost:82/sms/Layouts/Admin/images/layout_img/user_img.jpg" ?>" alt="#" /><span class="name_user">John David</span></a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="<?php echo "http://localhost:82/sms/Layouts/Admin/images/layout_img/user_img.jpg" ?>" alt="#" /><span class="name_user"><?php echo $_COOKIE["fullname"]; ?></span></a>
                                     <div class="dropdown-menu">
                                        <a class="dropdown-item" href="profile.html">My Profile</a>
                                        <a class="dropdown-item" href="settings.html">Settings</a>
                                        <a class="dropdown-item" href="help.html">Help</a>
-                                       <a class="dropdown-item" href="#"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
+                                       <a class="dropdown-item" href="<?php echo "http://localhost:82/sms/LogOutScript.php" ?>"><span>Log Out</span> <i class="fa fa-sign-out"></i></a>
                                     </div>
                                  </li>
                               </ul>

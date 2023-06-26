@@ -90,4 +90,15 @@
         ExecutreMySqlQuery($query);
     }
     
+    function Login($email, $password)
+    {
+        if (!empty($email) && !empty($password)) {
+            $query = "SELECT * FROM Employee WHERE Email = '".$email."' AND Password = '".$password."';";
+
+            $result  = ExecutreMySqlQuery($query);
+
+            return $result;
+        }
+    }
+
 ?>
