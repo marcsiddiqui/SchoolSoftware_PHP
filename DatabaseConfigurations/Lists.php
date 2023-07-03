@@ -61,5 +61,30 @@
         }
     }
 
-    
+    function PrepareFeeTypeList()
+    {
+        $query = "SELECT * FROM FeeType";
+        $result = ExecutreMySqlQuery($query);
+        if (count($result) > 0) {
+            if ($result["Success"] == true) {
+                if (mysqli_num_rows($result["Response"]) > 0) {
+                    while ($row = mysqli_fetch_assoc($result["Response"])) {
+                        echo
+                            "<tr>
+                                <td>".$row["Name"]."</td>
+                                <td>
+                                    <a href='http://localhost:82/sms/FeeTypes/EditFeeType.php?id=".$row["Id"]."' class='btn btn-warning' type='button'>Edit</a>
+                                    <button name='deleteFeeType' type='submit' value='".$row["Id"]."' class='btn btn-danger'>Delete</button>
+                                </td>
+                            </tr>";
+                    }
+                }
+                else {
+                    echo "<tr>
+                        <td colspan='4'>No Fee Types are found!</td>
+                    </tr>";
+                }
+            }
+        }
+    }
 ?>
