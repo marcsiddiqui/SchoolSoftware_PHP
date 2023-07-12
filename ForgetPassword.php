@@ -49,56 +49,15 @@
                      </div>
                   </div>
                   <div class="login_form">
-                     <form method="POST">
-                        <?php
-                           include "DatabaseConfigurations/DbFucntions.php";
-                           $email = $password = "";
-                           $emailError = $passwordError = $generalError = "";
-                           if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                              $password = $_POST["Password"];
-                              $email = $_POST["Email"];
-                              $passwordError = empty($password) ? "Please enter Password!" : "";
-                              $emailError = empty($email) ? "Please enter Email!" : "";
-                              if (!empty($password) && !empty($email)) {
-                                 $result = Login($email, $password);
-                                 if (count($result) > 0) {
-                                    if ($result["Success"] == true) {
-                                          if (mysqli_num_rows($result["Response"]) > 0) {
-                                          while ($row = mysqli_fetch_assoc($result["Response"])) {
-                                          setcookie("username", $email, time() + 36000);
-                                          $fullName = $row["FirstName"] . " " . $row["LastName"];
-                                          setcookie("fullname", $fullName, time() + 36000);
-                                          }
-                                          header("Location:http://localhost:82/sms/hrm/Employee.php");        // redirecting to login page
-                                          }
-                                          else {
-                                          $generalError = "Username or Password is invalid!";
-                                          }
-                                    }
-                                }
-                              }
-                           }
-                        ?>
+                     <form method="POST" action="SendResetPasswordEmail.php">
                         <fieldset>
                            <div class="field">
                               <label class="label_field">Email Address</label>
-                              <input type="text" name="Email" placeholder="E-mail" value="<?php echo $email; ?>" />
-                              <p class="errorMessage"><?php echo $emailError; ?></p>
-                           </div>
-                           <div class="field">
-                              <label class="label_field">Password</label>
-                              <input type="password" name="Password" placeholder="Password" value="<?php echo $password; ?>" />
-                              <p class="errorMessage"><?php echo $passwordError; ?></p>
-                           </div>
-                           <div class="field">
-                              <label class="label_field hidden">hidden label</label>
-                              <label class="form-check-label"><input type="checkbox" class="form-check-input"> Remember Me</label>
-                              <a class="forgot" href="<?php echo "http://localhost:82/sms/ForgetPassword.php" ?>">Forgot Password?</a>
+                              <input type="text" name="Email" placeholder="E-mail" />
                            </div>
                            <div class="field margin_0">
                               <label class="label_field hidden">hidden label</label>
-                              <button type="submit" class="main_bt">Sing In</button>
-                              <p class="errorMessage"><?php echo $generalError; ?></p>
+                              <button type="submit" name="send" class="main_bt">Request Reset Passowrd</button>
                            </div>
                         </fieldset>
                      </form>

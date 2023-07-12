@@ -81,23 +81,18 @@
                         ?>
                         <fieldset>
                            <div class="field">
-                              <label class="label_field">Email Address</label>
-                              <input type="text" name="Email" placeholder="E-mail" value="<?php echo $email; ?>" />
-                              <p class="errorMessage"><?php echo $emailError; ?></p>
-                           </div>
-                           <div class="field">
                               <label class="label_field">Password</label>
                               <input type="password" name="Password" placeholder="Password" value="<?php echo $password; ?>" />
                               <p class="errorMessage"><?php echo $passwordError; ?></p>
                            </div>
                            <div class="field">
-                              <label class="label_field hidden">hidden label</label>
-                              <label class="form-check-label"><input type="checkbox" class="form-check-input"> Remember Me</label>
-                              <a class="forgot" href="<?php echo "http://localhost:82/sms/ForgetPassword.php" ?>">Forgot Password?</a>
+                              <label class="label_field">Confirm Password</label>
+                              <input type="password" name="ConfirmPassword" placeholder="Confirm Password" value="<?php echo $password; ?>" />
+                              <p class="errorMessage"><?php echo $passwordError; ?></p>
                            </div>
                            <div class="field margin_0">
                               <label class="label_field hidden">hidden label</label>
-                              <button type="submit" class="main_bt">Sing In</button>
+                              <button type="submit" class="main_bt">Change Password</button>
                               <p class="errorMessage"><?php echo $generalError; ?></p>
                            </div>
                         </fieldset>
