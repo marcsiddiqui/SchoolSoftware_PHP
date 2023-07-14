@@ -52,30 +52,41 @@
                      <form method="POST">
                         <?php
                            include "DatabaseConfigurations/DbFucntions.php";
-                           $email = $password = "";
+                           include_once "ResetPasswordLogics.php";
+
+                           $urlData = str_replace(" ", "+", $_GET["data"]);
+                           $email = BreakUrlData($urlData);
+
+                           $password = "";
                            $emailError = $passwordError = $generalError = "";
+
                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
                               $password = $_POST["Password"];
-                              $email = $_POST["Email"];
-                              $passwordError = empty($password) ? "Please enter Password!" : "";
-                              $emailError = empty($email) ? "Please enter Email!" : "";
-                              if (!empty($password) && !empty($email)) {
-                                 $result = Login($email, $password);
+                              $confirmPassword = $_POST["ConfirmPassword"];
+
+                              if (empty($email)) {
+                                 header("Location:http://localhost:82/sms/LinkExpired.php");
+                              }
+
+                              if (empty($password) || empty($confirmPassword)) {
+                                 $passwordError ="Passwords required!";
+                              }
+
+                              if ($password != $confirmPassword) {
+                                 $passwordError ="Passwords do not match!";
+                              }
+                              
+                              if (!empty($password) && !empty($confirmPassword) && !empty($email)) {
+                                 
+                                 $result = ChangePassowrd($email, $password);
                                  if (count($result) > 0) {
                                     if ($result["Success"] == true) {
-                                          if (mysqli_num_rows($result["Response"]) > 0) {
-                                          while ($row = mysqli_fetch_assoc($result["Response"])) {
-                                          setcookie("username", $email, time() + 36000);
-                                          $fullName = $row["FirstName"] . " " . $row["LastName"];
-                                          setcookie("fullname", $fullName, time() + 36000);
-                                          }
-                                          header("Location:http://localhost:82/sms/hrm/Employee.php");        // redirecting to login page
-                                          }
-                                          else {
-                                          $generalError = "Username or Password is invalid!";
-                                          }
+                                       header("Location:http://localhost:82/sms/Login.php");
                                     }
-                                }
+                                    else {
+                                       //header("Location:http://localhost:82/sms/LinkExpired.php");
+                                    }
+                                 }
                               }
                            }
                         ?>

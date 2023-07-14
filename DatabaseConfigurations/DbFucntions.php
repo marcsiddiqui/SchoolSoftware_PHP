@@ -101,4 +101,16 @@
         }
     }
 
+    function ChangePassowrd($email, $password)
+    {
+        if (!empty($email) && !empty($password)) {
+
+            $query = "UPDATE Employee SET `Password` = '" . $password . "' WHERE Email = '" . $email . "';";
+
+            $result  = ExecutreMySqlQuery($query);
+
+            return $result;
+        }
+    }
+
 ?>

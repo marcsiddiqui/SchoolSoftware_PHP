@@ -1,4 +1,7 @@
 <?php
+
+include_once "ResetPasswordLogics.php";
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -10,8 +13,11 @@ if(isset($_POST['send'])){
     $name = htmlentities($_POST['Email']);
     $email = htmlentities($_POST['Email']);
     $subject = "Reset Passowrd Email"; //htmlentities($_POST['subject']);
+
+    $url = "http://localhost:82/sms/ResetPassword.php?data=" . strval(GenerateUrlData($email));
+
     $message = "Please use following link to reset password, this email will be expired in 15 minutes.
-    <a href='http://localhost:82/sms/ResetPassword.php?data=1'>Reset Password</a>"; //htmlentities($_POST['message']);
+    <a href='".$url."'>Reset Password</a>"; //htmlentities($_POST['message']);
 
     $mail = new PHPMailer(true);
     $mail->isSMTP();
