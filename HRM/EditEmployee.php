@@ -40,6 +40,7 @@
 
                       $firstName = $lastName = $email = $password = $cnic = $address = $phoneNumber = "";
                       $firstNameError = $lastNameError = $emailError = $passwordError = $cnicError = $addressError = $phoneNumberError = "";
+                      $roleId = 0;
 
                       // need to get employee from database
                       if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -57,6 +58,7 @@
                                         $cnic = $row["CNIC"];
                                         $address = $row["Address"];
                                         $phoneNumber = $row["PhoneNumber"];
+                                        $roleId = $row["RoleId"];
                                     }
                                 }
                                 else {
@@ -139,6 +141,10 @@
                         <label class="customLable">Address:</label>
                         <input type="text" class="sr-input customWidth" id="Address" name="Address" value="<?php echo $address; ?>">
                         <p class="errorMessage"><?php echo $addressError; ?></p>
+                      </div>
+                      <div class="form-group">
+                        <label class="customLable">Role:</label>
+                        <?php PrepareDropDownList("Roles", "Name", "Id", "RoleId", $roleId); ?>
                       </div>
                     
                   </div>

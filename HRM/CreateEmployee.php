@@ -32,7 +32,7 @@
             <div class="col-md-12">
               <div class="full padding_infor_info">
                 <div class="mail-box">
-                  <div class="inbox-head" style="height: 550px;">
+                  <div class="inbox-head" style="height: 625px;">
 
                   <?php
 
@@ -50,6 +50,7 @@
                       $cnic = $_POST["CNIC"];
                       $email = $_POST["Email"];
                       $address = $_POST["Address"];
+                      $roleId = $_POST["RoleId"];
 
                       $firstNameError = empty($firstName) ? "Please enter First Name!" : "";
                       $lastNameError = empty($lastName) ? "Please enter Last Name!" : "";
@@ -68,7 +69,8 @@
                           "Password" => $password,
                           "CNIC" => $cnic,
                           "Email" => $email,
-                          "Address" => $address
+                          "Address" => $address,
+                          "RoleId" => $roleId
                         );
 
                         Insert("Employee", $columnsArray);
@@ -110,6 +112,10 @@
                         <label class="customLable">Address:</label>
                         <input type="text" class="sr-input customWidth" id="Address" name="Address" value="<?php echo $address; ?>">
                         <p class="errorMessage"><?php echo $addressError; ?></p>
+                      </div>
+                      <div class="form-group">
+                        <label class="customLable">Role:</label>
+                        <?php PrepareDropDownList("Roles", "Name", "Id", "RoleId", 0); ?>
                       </div>
                     
                   </div>

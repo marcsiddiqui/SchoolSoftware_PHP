@@ -19,7 +19,7 @@
         }
     }
 
-    function Insert($tableName, $col_val)
+    function Insert($tableName, $col_val, $maintainCreatedOn = false)
     {
         if (!empty($tableName) && count($col_val) > 0) {
             
@@ -41,6 +41,10 @@
                 else {
                     $query = $query . $value . ",";
                 }
+            }
+
+            if ($maintainCreatedOn == true) {
+                $query = $query . " CreatedOn = NOW(),";
             }
 
             $query = substr_replace($query, ");", -1);
@@ -111,6 +115,34 @@
 
             return $result;
         }
+    }
+
+    function PrepareDropDownList($tableName, $textColName, $valueColName, $dropDownName, $selectedValue) {
+        echo "<select name='".$dropDownName."' id='".$dropDownName."'>";
+        echo "<option value='0'>Select ".$tableName."</option>";
+        if (!empty($tableName) && !empty($textColName) && !empty($valueColName)) {
+            # code...
+            $query = "SELECT * FROM " . $tableName;
+            $result = ExecutreMySqlQuery($query);
+            if (count($result) > 0) {
+                if ($result["Success"] == true) {
+                    if (mysqli_num_rows($result["Response"]) > 0) {
+                        while ($row = mysqli_fetch_assoc($result["Response"])) {
+                            if ($selectedValue == $row[$valueColName]) {
+                                echo
+                                    "<option value='".$row[$valueColName]."' selected='selected'>".$row[$textColName]."</option>";
+                            }
+                            else {
+                                echo
+                                    "<option value='".$row[$valueColName]."'>".$row[$textColName]."</option>";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        echo "</select>";
     }
 
 ?>
