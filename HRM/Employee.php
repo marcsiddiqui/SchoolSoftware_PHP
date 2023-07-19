@@ -34,6 +34,7 @@
                     <table class="table customLable">
                       <thead class="table-dark">
                         <tr>
+                          <th></th>
                           <th>Firstname</th>
                           <th>Lastname</th>
                           <th>Email</th>

@@ -11,6 +11,7 @@
                     while ($row = mysqli_fetch_assoc($result["Response"])) {
                         echo
                             "<tr>
+                                <td><img height='75px' width='75px' src='http://localhost:82/sms/".$row["ImagePath"]."' /></td>
                                 <td>".$row["FirstName"]."</td>
                                 <td>".$row["LastName"]."</td>
                                 <td>".$row["Email"]."</td>

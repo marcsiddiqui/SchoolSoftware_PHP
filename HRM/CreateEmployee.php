@@ -23,7 +23,7 @@
   <!-- table section -->
   <div class="col-md-12">
     <div class="white_shd full margin_bottom_30">
-      <form method="POST">
+      <form method="POST" enctype="multipart/form-data">
         <button type="submit" style="float:right; margin-left: 5px;" class="btn btn-primary">Save Employee</button>
         <a href="http://localhost:82/sms/hrm/Employee.php" style="float:right" type="button" class="btn btn-secondary">Back to List</a>  
         <div class="full inbox_inner_section">
@@ -32,7 +32,7 @@
             <div class="col-md-12">
               <div class="full padding_infor_info">
                 <div class="mail-box">
-                  <div class="inbox-head" style="height: 625px;">
+                  <div class="inbox-head" style="height: 700px;">
 
                   <?php
 
@@ -62,6 +62,14 @@
 
                       if (!empty($firstName) && !empty($lastName) && !empty($email) && !empty($password) && !empty($cnic) && !empty($address) && !empty($phoneNumber)) {
                         
+                        if (isset($_FILES["image"])) {
+
+                          $temp_name = $_FILES["image"]["tmp_name"];
+                          $name = $_FILES["image"]["name"];
+                          $imagePath = "../UploadedImages/".$name;
+                          move_uploaded_file($temp_name, $imagePath);
+                        }
+                        
                         $columnsArray = array(
                           "FirstName" => $firstName,
                           "LastName" => $lastName,
@@ -70,7 +78,8 @@
                           "CNIC" => $cnic,
                           "Email" => $email,
                           "Address" => $address,
-                          "RoleId" => $roleId
+                          "RoleId" => $roleId,
+                          "ImagePath" => "UploadedImages/".$name
                         );
 
                         Insert("Employee", $columnsArray);
@@ -117,7 +126,21 @@
                         <label class="customLable">Role:</label>
                         <?php PrepareDropDownList("Roles", "Name", "Id", "RoleId", 0); ?>
                       </div>
-                    
+                      <div class="form-group">
+                        <img id="user_img" height="100" width="90" style="border:solid" />
+                        <input type="file" id="image" name="image" onchange="show(this)" />
+                      </div>
+                      <script>
+                        function show(input) {
+                            if (input.files && input.files[0]) {
+                                var filerdr = new FileReader();
+                                filerdr.onload = function (e) {
+                                    $('#user_img').attr('src', e.target.result);
+                                }
+                                filerdr.readAsDataURL(input.files[0]);
+                            }
+                        }
+                      </script>
                   </div>
                 </div>
               </div>
