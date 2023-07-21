@@ -38,6 +38,9 @@
 
                     include "../DatabaseConfigurations/DbFucntions.php";
 
+                    
+                    echo "<label class='customLable'>".GetNew_GUID()."</label><br />";
+
                     $firstName = $lastName = $email = $password = $cnic = $address = $phoneNumber = "";
                     $firstNameError = $lastNameError = $emailError = $passwordError = $cnicError = $addressError = $phoneNumberError = "";
 
@@ -66,7 +69,8 @@
 
                           $temp_name = $_FILES["image"]["tmp_name"];
                           $name = $_FILES["image"]["name"];
-                          $imagePath = "../UploadedImages/".$name;
+                          $newFileName = GetNew_GUID().$name;
+                          $imagePath = "../UploadedImages/".$newFileName;
                           move_uploaded_file($temp_name, $imagePath);
                         }
                         
@@ -79,7 +83,7 @@
                           "Email" => $email,
                           "Address" => $address,
                           "RoleId" => $roleId,
-                          "ImagePath" => "UploadedImages/".$name
+                          "ImagePath" => "UploadedImages/".$newFileName
                         );
 
                         Insert("Employee", $columnsArray);
