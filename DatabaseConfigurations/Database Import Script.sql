@@ -25,7 +25,8 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteById` (`tableName` VARCHAR(500), `id` INT, `isSoftDelete` BIT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DeleteById` (`tableName` VARCHAR(500), `id` INT, `isSoftDelete` BIT)
+BEGIN
 
 	SET @Query = IF (
                         isSoftDelete = 1, 

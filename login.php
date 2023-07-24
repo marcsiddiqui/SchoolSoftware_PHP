@@ -64,12 +64,24 @@
                                  if (count($result) > 0) {
                                     if ($result["Success"] == true) {
                                           if (mysqli_num_rows($result["Response"]) > 0) {
-                                          while ($row = mysqli_fetch_assoc($result["Response"])) {
-                                          setcookie("username", $email, time() + 36000);
-                                          $fullName = $row["FirstName"] . " " . $row["LastName"];
-                                          setcookie("fullname", $fullName, time() + 36000);
-                                          }
-                                          header("Location:http://localhost:82/sms/hrm/Employee.php");        // redirecting to login page
+
+                                             $roleName = "";
+
+                                             while ($row = mysqli_fetch_assoc($result["Response"])) {
+                                                setcookie("username", $email, time() + 36000);
+                                                $fullName = $row["FirstName"] . " " . $row["LastName"];
+                                                setcookie("fullname", $fullName, time() + 36000);
+                                                setcookie("role", $row["RoleName"], time() + 36000);
+                                                $roleName = $row["RoleName"];
+                                             }
+
+                                             // to do a role based reirection
+                                             if ($roleName == "Admin" || $roleName == "Principal") {
+                                                header("Location:http://localhost:82/sms/AdminDashboard.php");
+                                             }
+                                             else {
+                                                header("Location:http://localhost:82/sms/CustomerDashboard.php");
+                                             }
                                           }
                                           else {
                                           $generalError = "Username or Password is invalid!";

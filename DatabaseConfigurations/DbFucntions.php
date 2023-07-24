@@ -97,7 +97,10 @@
     function Login($email, $password)
     {
         if (!empty($email) && !empty($password)) {
-            $query = "SELECT * FROM Employee WHERE Email = '".$email."' AND Password = '".$password."';";
+            $query = "SELECT E.*, R.Name RoleName FROM Employee E
+                    LEFT JOIN Roles R
+                    ON E.RoleId = R.Id
+                    WHERE E.Email = '".$email."' AND E.Password = '".$password."';";
 
             $result  = ExecutreMySqlQuery($query);
 

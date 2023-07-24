@@ -1,5 +1,17 @@
 <?php
-  include_once "../Layouts/Admin/header.php"
+  include_once "../Layouts/Admin/header.php";
+?>
+
+<?php
+
+// use this to handle the role based redirection
+// if ($_COOKIE["role"] != "Admin" && $_COOKIE["role"] != "Principal") {
+//   echo "<script type='text/javascript'> 
+//     window.location.replace('http://localhost:82/sms/hrm/employee.php'); 
+//   </script>";
+//   // header("Location:http://localhost:82/sms/CustomerDashboard.php");
+// }
+
 ?>
 <style>
   .customWidth {
