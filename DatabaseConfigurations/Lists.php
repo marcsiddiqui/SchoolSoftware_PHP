@@ -88,4 +88,80 @@
             }
         }
     }
+    
+    function PrepareProductMenu()
+    {
+        $query = "SELECT * FROM employee WHERE Deleted = 0 ORDER BY Id DESC";
+        $result = ExecutreMySqlQuery($query);
+        if (count($result) > 0) {
+            if ($result["Success"] == true) {
+                if (mysqli_num_rows($result["Response"]) > 0) {
+
+                    $createMainBox = true;
+
+                    $innerProductCount = 0;
+
+                    $activeApplied = "active";
+
+                    $html = "";
+
+                    while ($row = mysqli_fetch_assoc($result["Response"])) {
+
+                        // opening a main box
+                        if ($createMainBox) {
+                            $html = $html . 
+                            "
+                                <div class='carousel-item ".$activeApplied."'>
+                                    <div class='container'>
+                                        <h1 class='fashion_taital'>Man & Woman Fashion</h1>
+                                        <div class='fashion_section_2'>
+                                            <div class='row'>
+                            ";
+
+                            $createMainBox = false;
+                        }
+
+                        $activeApplied = "";
+
+                        // putting products 1 by 1 in main box
+                        $html = $html .
+                        "
+                            <div class='col-lg-4 col-sm-4'>
+                                <div class='box_main'>
+                                <h4 class='shirt_text'>".$row["FirstName"]."</h4>
+                                <p class='price_text'>Price  <span style='color: #262626;'>$ ".$row["Password"]."</span></p>
+                                <div class='tshirt_img'><img src='http://localhost:82/sms/".$row["ImagePath"]."'></div>
+                                    <div class='btn_main'>
+                                        <div class='buy_bt'><a href='#'>Buy Now</a></div>
+                                        <div class='seemore_bt'><a href='#'>See More</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        ";
+
+                        $innerProductCount = $innerProductCount + 1;
+
+                        // if we have added 3 products then close the main the box
+                        if ($innerProductCount == 3) {
+                            $html = $html .
+                            "
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ";
+
+                            $createMainBox = true;
+                            $innerProductCount = 0;
+                        }
+                    }
+
+                    echo $html;
+                }
+                else {
+                    
+                }
+            }
+        }
+    }
 ?>
