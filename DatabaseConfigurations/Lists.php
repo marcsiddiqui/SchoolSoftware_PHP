@@ -1,9 +1,35 @@
 <?php
     include "DbFucntions.php";
 
-    function PrepareEmployeeList()
+    function PrepareEmployeeList($filter_col_val)
     {
         $query = "SELECT * FROM employee WHERE Deleted = 0";
+
+        $length = count($filter_col_val);
+        $loopCount = 1;
+
+        foreach ($filter_col_val as $key => $value) {
+
+            if (!empty($value)) {
+
+                // $query = $query . " OR ";   // global search
+                $query = $query . " AND ";   // sepcific search
+                
+                if (gettype($value) == "string") {
+                    $query = $query . " " . $key . " like '%" . $value . "%' ";
+                }
+                else {
+                    $query = $query . " " . $key . " = " . $value . " ";
+                }
+                
+            }
+
+            $loopCount++;
+
+        }
+
+        echo $query;
+
         $result = ExecutreMySqlQuery($query);
         if (count($result) > 0) {
             if ($result["Success"] == true) {
